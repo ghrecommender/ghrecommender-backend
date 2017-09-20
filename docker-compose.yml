@@ -1,0 +1,52 @@
+version: "2"
+
+services:
+  postgres:
+    extends:
+      file: common.yml
+      service: postgres
+    volumes:
+      - /srv/postgres:/var/lib/postgresql/data
+  
+  mongodb:
+    extends:
+      file: common.yml
+      service: mongodb
+    volumes:
+      - /srv/mongodb/db:/data/db
+
+  redis:
+    extends:
+      file: common.yml
+      service: redis
+  
+  ghmodel:
+    extends:
+      file: common.yml
+      service: ghmodel
+
+  web:
+    image: ghrecommender/ghrecommender
+    depends_on:
+      - postgres
+      - mongodb
+      - redis
+      - ghmodel
+    env_file:
+      - ./.envs/prod.env
+    entrypoint: wait-for-it.sh postgres:5432 --timeout=60 --
+    command: sh docker-entrypoint.sh
+
+  nginx:
+    extends:
+      file: common.yml
+      service: nginx
+    depends_on:
+      - web
+    volumes:
+      - ./conf/default.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./conf/nginx.conf:/etc/nginx/nginx.conf:ro
+    volumes_from:
+      - web:ro
+    ports:
+      - 80:80

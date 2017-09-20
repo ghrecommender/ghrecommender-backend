@@ -1,0 +1,29 @@
+[[source]]
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+
+[dev-packages]
+
+django-debug-toolbar = "*"
+Werkzeug = "*"
+psycopg2 = "*"
+mock = "*"
+
+[packages]
+
+Django = "*"
+django-extensions = "*"
+django-redis = "*"
+django-configurations = "*"
+dj-database-url = "*"
+django-cache-url = "*"
+social-auth-core = "*"
+social-auth-app-django = "*"
+djangorestframework = "*"
+drf-extensions = "*"
+django-cors-headers = "*"
+django-filter = "*"
+Markdown = "*"
+pymongo = "*"
+requests = "*"
+raven = "*"

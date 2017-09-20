@@ -1,0 +1,9 @@
+output-format: grouped
+
+strictness: medium
+doc-warnings: false
+test-warnings: false
+max-line-length: 120
+
+uses:
+  - django

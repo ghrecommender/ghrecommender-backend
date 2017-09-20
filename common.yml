@@ -1,0 +1,26 @@
+version: "2"
+
+services:
+  mongodb:
+    image: mongo:3.4
+  
+  postgres:
+    image: postgres:9.6-alpine
+    env_file:
+      - ./.envs/postgres.env
+
+  redis:
+    image: redis:3.2-alpine
+  
+  ghmodel:
+    image: yurtaev/ghrecommender-model
+  
+  web:
+    build: .
+    entrypoint: wait-for-it.sh postgres:5432 --timeout=60 --
+    command: sh docker-entrypoint.sh
+    env_file:
+      - ./.envs/base.env
+
+  nginx:
+    image: nginx:1.11-alpine

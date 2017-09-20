@@ -1,0 +1,34 @@
+version: "2"
+
+services:
+  postgres:
+    extends:
+      file: common.yml
+      service: postgres
+    volumes:
+      - ./.docker/postgres:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+  
+  mongodb:
+    extends:
+      file: common.yml
+      service: mongodb
+    volumes:
+      - ./.docker/mongodb:/data/db
+    ports:
+      - 27017:27017
+
+  redis:
+    extends:
+      file: common.yml
+      service: redis
+    ports:
+      - "6379:6379"
+  
+  ghmodel:
+    extends:
+      file: common.yml
+      service: ghmodel
+    ports:
+      - "4000:4000"
