@@ -1,0 +1,24 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/ghrecommender
+    docker:
+      - image: circleci/python:2.7
+    steps:
+      - checkout
+      - restore_cache:
+          key: deps1-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+      - run:
+          command: |
+            virtualenv venv
+            . venv/bin/activate
+            pip install pipenv
+            pipenv install --dev --system
+      - save_cache:
+          key: deps1-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+          paths:
+            - "venv"
+      - run:
+          command: |
+            . venv/bin/activate
+            make test

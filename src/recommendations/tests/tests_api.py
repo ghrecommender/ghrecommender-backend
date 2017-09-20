@@ -31,8 +31,10 @@ class RecommendationsAPITest(APITestCase):
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
+    @patch('recommendations.views.get_stars')
     @patch('recommendations.views.get_recommendations')
-    def test_get_recommendations(self, mock_get_recommendations):
+    def test_get_recommendations(self, mock_get_recommendations, mock_get_stars):
+        mock_get_stars.return_value = 10
         mock_get_recommendations.return_value = expected_recommendations
         self.client.login(username='example', password='examplepassword')
         response = self.client.get(self.url)
