@@ -147,7 +147,7 @@ class Base(Configuration):
     SOCIAL_AUTH_GITHUB_SCOPE = ['user:email']
     
     SOCIAL_AUTH_LOGIN_REDIRECT_URL = values.Value('http://github.local:3000/app/recommendations/')  # Frontend app
-    SOCIAL_AUTH_REDIRECT_IS_HTTPS = True
+    SOCIAL_AUTH_REDIRECT_IS_HTTPS = values.BooleanValue(True)
 
     # django-rest-framework
 
@@ -177,6 +177,7 @@ class Base(Configuration):
     }
 
     REST_FRAMEWORK_EXTENSIONS = {
+        'DEFAULT_CACHE_ERRORS': False,
         'DEFAULT_CACHE_RESPONSE_TIMEOUT': 60 * 1,
         'DEFAULT_OBJECT_CACHE_KEY_FUNC':
             'rest_framework_extensions.utils.default_object_cache_key_func',
