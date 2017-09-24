@@ -31,8 +31,8 @@ class Base(Configuration):
     # SECURITY WARNING: don't run with debug turned on in production!
     DEBUG = values.BooleanValue(True)
 
-    ALLOWED_HOSTS = values.ListValue(['api.github.local'])
-    SESSION_COOKIE_DOMAIN = values.Value('.github.local')
+    ALLOWED_HOSTS = values.ListValue(['api.ghrecommender.localhost'])
+    SESSION_COOKIE_DOMAIN = values.Value('.ghrecommender.localhost')
 
 
     # Application definition
@@ -146,14 +146,14 @@ class Base(Configuration):
     SOCIAL_AUTH_GITHUB_SECRET = values.SecretValue()
     SOCIAL_AUTH_GITHUB_SCOPE = ['user:email']
     
-    SOCIAL_AUTH_LOGIN_REDIRECT_URL = values.Value('http://github.local:3000/app/recommendations/')  # Frontend app
+    SOCIAL_AUTH_LOGIN_REDIRECT_URL = values.Value('http://ghrecommender.localhost:3000/app/recommendations/')  # Frontend app
     SOCIAL_AUTH_REDIRECT_IS_HTTPS = values.BooleanValue(True)
 
     # django-rest-framework
 
     CORS_ORIGIN_ALLOW_ALL = False
     CORS_ALLOW_CREDENTIALS = True
-    CORS_ORIGIN_WHITELIST = values.ListValue(['github.local:3000'])
+    CORS_ORIGIN_WHITELIST = values.ListValue(['ghrecommender.localhost:3000'])
 
     REST_FRAMEWORK = {
         'DEFAULT_AUTHENTICATION_CLASSES': (
