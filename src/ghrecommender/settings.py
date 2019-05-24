@@ -153,7 +153,7 @@ class Base(Configuration):
 
     CORS_ORIGIN_ALLOW_ALL = False
     CORS_ALLOW_CREDENTIALS = True
-    CORS_ORIGIN_WHITELIST = values.ListValue(['ghrecommender.localhost:3000'])
+    CORS_ORIGIN_WHITELIST = values.ListValue(['http://ghrecommender.localhost:3000'])
 
     REST_FRAMEWORK = {
         'DEFAULT_AUTHENTICATION_CLASSES': (
